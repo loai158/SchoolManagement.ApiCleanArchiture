@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\net8.0\SchoolManagement.Core.deps.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SchoolManagement.Data\SchoolManagement.Data.csproj" />
+    <ProjectReference Include="..\SchoolManagement.Infrastructure\SchoolManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\SchoolManagement.Service\SchoolManagement.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Department\Commands\Handlers\" />
+    <Folder Include="Features\Department\Commands\Models\" />
+    <Folder Include="Features\Department\Commands\Validations\" />
+    <Folder Include="Mapping\Departments\CommandMapping\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net8.0\Ar\SchoolManagement.Core.resources.dll" />
+    <None Include="bin\Debug\net8.0\En\SchoolManagement.Core.resources.dll" />
+    <None Include="bin\Debug\net8.0\SchoolManagement.Core.dll" />
+    <None Include="bin\Debug\net8.0\SchoolManagement.Core.pdb" />
+    <None Include="bin\Debug\net8.0\SchoolManagement.Data.dll" />
+    <None Include="bin\Debug\net8.0\SchoolManagement.Data.pdb" />
+    <None Include="bin\Debug\net8.0\SchoolManagement.Infrastructure.dll" />
+    <None Include="bin\Debug\net8.0\SchoolManagement.Infrastructure.pdb" />
+    <None Include="bin\Debug\net8.0\SchoolManagement.Service.dll" />
+    <None Include="bin\Debug\net8.0\SchoolManagement.Service.pdb" />
+  </ItemGroup>
+
+</Project>

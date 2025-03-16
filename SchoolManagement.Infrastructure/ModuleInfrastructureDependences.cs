@@ -1,0 +1,22 @@
+﻿using Microsoft.Extensions.DependencyInjection;
+using SchoolManagement.Infrastructure.Abstracts;
+using SchoolManagement.Infrastructure.InfrastructureBases;
+using SchoolManagement.Infrastructure.Repositries;
+using SchoolManagement.Infrastructure.UnitOfWorks;
+
+namespace SchoolManagement.Infrastructure
+{
+    public static class ModuleInfrastructureDependences
+    {
+        public static IServiceCollection AddInfrastructureDependences(this IServiceCollection services)
+        {
+            services.AddTransient<IStudentRepositry, StudentRepositry>();
+            services.AddTransient<IDepartmentRepositry, DepartmentRepositry>();
+            services.AddTransient<IInstructorRepositry, InstructorRepositry>();
+            services.AddTransient<ISubjectRepositry, SubjectRepositry>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient(typeof(IGenericRepositryAsync<>), typeof(GenericRepositryAsync<>));
+            return services;
+        }
+    }
+}
