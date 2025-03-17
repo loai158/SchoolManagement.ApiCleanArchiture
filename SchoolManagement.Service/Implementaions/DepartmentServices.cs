@@ -26,5 +26,15 @@ namespace SchoolManagement.Service.Implementaions
                  tracked: false);
             return department;
         }
+
+        public async Task<bool> IsDepartmentExist(int id)
+        {
+            var DepartmentDb = await _unitOfWork.Repositry<Department>().GetOne(s => s.DID == id);
+            if (DepartmentDb == null)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

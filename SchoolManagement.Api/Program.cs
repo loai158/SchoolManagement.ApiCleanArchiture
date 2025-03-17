@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SchoolManagement.Core;
 using SchoolManagement.Core.Middleware;
+using SchoolManagement.Data.Entities.Identity;
 using SchoolManagement.Infrastructure;
 using SchoolManagement.Infrastructure.Data;
 using SchoolManagement.Service;
@@ -28,7 +30,21 @@ namespace SchoolManagement.Api
             {
                 opt.ResourcesPath = "Resources";
             });
+            //Identity
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
+                options =>
+                {
+                    options.SignIn.RequireConfirmedEmail = true;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequiredLength = 6;
 
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                    options.Lockout.MaxFailedAccessAttempts = 5;
+                    options.Lockout.AllowedForNewUsers = true;
+                }).AddEntityFrameworkStores<ApplicationDbContext>()
+                                .AddDefaultTokenProviders();
             builder.Services.Configure<RequestLocalizationOptions>(options =>
             {
                 List<CultureInfo> supportedCultures = new List<CultureInfo>
