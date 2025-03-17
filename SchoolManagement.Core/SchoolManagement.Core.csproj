@@ -23,6 +23,7 @@
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.3.1" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.13" />
   </ItemGroup>
 
@@ -30,7 +31,11 @@
     <Folder Include="Features\Department\Commands\Handlers\" />
     <Folder Include="Features\Department\Commands\Models\" />
     <Folder Include="Features\Department\Commands\Validations\" />
+    <Folder Include="Features\User\Queries\Handlers\" />
+    <Folder Include="Features\User\Queries\Models\" />
+    <Folder Include="Features\User\Queries\" />
     <Folder Include="Mapping\Departments\CommandMapping\" />
+    <Folder Include="Mapping\Users\QueryMapping\" />
   </ItemGroup>
 
   <ItemGroup>
