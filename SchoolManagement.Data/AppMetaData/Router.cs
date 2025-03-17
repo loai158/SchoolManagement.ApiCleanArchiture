@@ -25,5 +25,15 @@
             public const string Delete = Perfix + "/{id}";
             public const string Paginate = Perfix + "/Paginate";
         }
+        public static class ApplicationUserRouting
+        {
+            public const string Perfix = Rule + "ApplicationUser";
+            public const string List = Perfix + "/List";
+            public const string GetById = Perfix + "/{id}";
+            public const string Register = Perfix + "/Register";
+            public const string Edit = Perfix + "/Edit";
+            public const string Delete = Perfix + "/{id}";
+            public const string Paginate = Perfix + "/Paginate";
+        }
     }
 }
