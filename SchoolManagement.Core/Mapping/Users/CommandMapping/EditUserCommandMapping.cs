@@ -5,10 +5,10 @@ namespace SchoolManagement.Core.Mapping.Users
 {
     public partial class UserProfile
     {
-        public void AddUserQueryMapping()
+        public void EditUserCommandMapping()
         {
-            CreateMap<AddUserCommand, ApplicationUser>();
-
+            CreateMap<EditUserCommand, ApplicationUser>();
         }
     }
+
 }
