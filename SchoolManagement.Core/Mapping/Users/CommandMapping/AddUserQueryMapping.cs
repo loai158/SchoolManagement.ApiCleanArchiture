@@ -9,6 +9,7 @@ namespace SchoolManagement.Core.Mapping.Users
         {
             CreateMap<AddUserCommand, ApplicationUser>();
 
+
         }
     }
 }
