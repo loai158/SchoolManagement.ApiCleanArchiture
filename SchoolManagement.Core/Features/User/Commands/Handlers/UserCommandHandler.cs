@@ -8,6 +8,8 @@ using SchoolManagement.Data.Entities.Identity;
 namespace SchoolManagement.Core.Features.User.Commands.Handlers
 {
     public class UserCommandHandler : ResponseHandler,
+        IRequestHandler<AddUserCommand, Response<string>>,
+        IRequestHandler<EditUserCommand, Response<string>>
     {
         private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
