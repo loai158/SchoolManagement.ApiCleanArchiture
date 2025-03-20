@@ -34,6 +34,7 @@
             public const string Edit = Perfix + "/Edit";
             public const string Delete = Perfix + "/{id}";
             public const string Paginate = Perfix + "/Paginate";
+            public const string ChangePassword = Perfix + "/ChangePassword";
         }
     }
 }
