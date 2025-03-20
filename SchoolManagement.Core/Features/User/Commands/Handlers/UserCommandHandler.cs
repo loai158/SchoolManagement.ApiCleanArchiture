@@ -9,7 +9,9 @@ namespace SchoolManagement.Core.Features.User.Commands.Handlers
 {
     public class UserCommandHandler : ResponseHandler,
         IRequestHandler<AddUserCommand, Response<string>>,
-        IRequestHandler<EditUserCommand, Response<string>>
+        IRequestHandler<DeleteUserCommand, Response<string>>,
+        IRequestHandler<EditUserCommand, Response<string>>,
+        IRequestHandler<ChangeUserPAsswordCommand, Response<string>>
     {
         private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -72,6 +74,41 @@ namespace SchoolManagement.Core.Features.User.Commands.Handlers
                 return NotFound<string>();
             }
 
+        }
+
+        public async Task<Response<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+        {
+            var userDb = await _userManager.FindByIdAsync(request.Id);
+            if (userDb != null)
+            {
+                var result = await _userManager.DeleteAsync(userDb);
+                if (result.Succeeded)
+                {
+                    return Success("Deleted Succefully");
+                }
+                else
+                {
+                    return BadRequest<string>("Some thing Wrong Happen");
+                }
+            }
+            else
+            {
+                return NotFound<string>();
+            }
+        }
+
+        public async Task<Response<string>> Handle(ChangeUserPAsswordCommand request, CancellationToken cancellationToken)
+        {
+            var user = await _userManager.FindByIdAsync(request.UserId);
+            if (user != null)
+            {
+                var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+                return Success("Password Changed Successfully");
+            }
+            else
+            {
+                return NotFound<string>();
+            }
         }
     }
 }

@@ -32,5 +32,17 @@ namespace SchoolManagement.Api.Controllers
             var response = await Mediator.Send(Command);
             return NewResult(response);
         }
+        [HttpPost(Router.ApplicationUserRouting.ChangePassword)]
+        public async Task<IActionResult> CahngeUserPassword([FromBody] ChangeUserPAsswordCommand Command)
+        {
+            var response = await Mediator.Send(Command);
+            return NewResult(response);
+        }
+        [HttpDelete(Router.ApplicationUserRouting.Delete)]
+        public async Task<IActionResult> DeleteUser([FromRoute] string id)
+        {
+            var response = await Mediator.Send(new DeleteUserCommand(id));
+            return NewResult(response);
+        }
     }
 }
