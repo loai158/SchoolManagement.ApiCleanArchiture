@@ -110,5 +110,31 @@ namespace SchoolManagement.Core.Features.User.Commands.Handlers
                 return NotFound<string>();
             }
         }
+
+        public async Task<Response<string>> Handle(EditUserCommand request, CancellationToken cancellationToken)
+        {
+            //find if emil exist first
+            var userDb = await _userManager.FindByIdAsync(request.Id);
+            if (userDb != null)
+            {
+                //map first the create
+                var mapper = _mapper.Map(request, userDb);
+                var result = await _userManager.UpdateAsync(mapper);
+                if (result.Succeeded)
+                {
+                    return Success("User Eidted Successfully");
+                }
+                else
+                {
+                    return BadRequest<string>("Faild to edit the user");
+                }
+
+            }
+            else
+            {
+                return NotFound<string>();
+            }
+
+        }
     }
 }
