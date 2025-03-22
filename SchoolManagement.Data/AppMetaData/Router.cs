@@ -36,5 +36,17 @@
             public const string Paginate = Perfix + "/Paginate";
             public const string ChangePassword = Perfix + "/ChangePassword";
         }
+        public static class Authentication
+        {
+            public const string Perfix = Rule + "Authentication";
+            public const string SignIn = Perfix + "/SignIn";
+
+        }
+        public static class Authorization
+        {
+            public const string Perfix = Rule + "Authorization";
+            public const string AddRole = Perfix + "/AddRole";
+
+        }
     }
 }
