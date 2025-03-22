@@ -1,15 +1,18 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using SchoolManagement.Core;
 using SchoolManagement.Core.Middleware;
 using SchoolManagement.Data.Entities.Identity;
+using SchoolManagement.Data.Helper;
 using SchoolManagement.Infrastructure;
 using SchoolManagement.Infrastructure.Data;
 using SchoolManagement.Service;
 using System.Globalization;
-
+using System.Text;
 namespace SchoolManagement.Api
 {
     public class Program
@@ -85,6 +88,38 @@ namespace SchoolManagement.Api
                         policy.AllowAnyOrigin();
                     });
             });
+            //JWT
+            var jwtSettings = new JwtSettings();
+            //   var emailSettings = new EmailSettings();
+            // builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+            builder.Configuration.GetSection(nameof(jwtSettings)).Bind(jwtSettings);
+            //configuration.GetSection(nameof(emailSettings)).Bind(emailSettings);
+
+            builder.Services.AddSingleton(jwtSettings);
+            //services.AddSingleton(emailSettings);
+            builder.Services.AddAuthentication(options =>
+             {
+                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+             })
+                .AddJwtBearer(o =>
+                {
+                    o.RequireHttpsMetadata = false;
+                    o.SaveToken = false;
+                    o.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidIssuer = jwtSettings.Issuer,
+                        ValidAudience = jwtSettings.Audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.secretKey)),
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
+
+
             var app = builder.Build();
             var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(options.Value);
@@ -99,6 +134,7 @@ namespace SchoolManagement.Api
             app.UseHttpsRedirection();
 
             app.UseCors(CORS);
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
