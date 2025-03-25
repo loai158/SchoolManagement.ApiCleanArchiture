@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SchoolManagement.Data\SchoolManagement.Data.csproj" />
-    <ProjectReference Include="..\SchoolManagement.Infrastructure\SchoolManagement.Infrastructure.csproj" />
     <ProjectReference Include="..\SchoolManagement.Service\SchoolManagement.Service.csproj" />
   </ItemGroup>
 
@@ -28,10 +27,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Authentication\Commands\Responses\" />
+    <Folder Include="Features\Authentication\Queries\" />
     <Folder Include="Features\Department\Commands\Handlers\" />
     <Folder Include="Features\Department\Commands\Models\" />
     <Folder Include="Features\Department\Commands\Validations\" />
     <Folder Include="Mapping\Departments\CommandMapping\" />
+    <Folder Include="Mapping\Roles\CommandMapping\" />
   </ItemGroup>
 
   <ItemGroup>

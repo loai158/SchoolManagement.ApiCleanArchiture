@@ -35,6 +35,7 @@ namespace SchoolManagement.Core.Features.User.Commands.Handlers
                 var result = await _userManager.CreateAsync(registerUser, request.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(registerUser, "Admin");
                     return Created("User Rigistered Successfully");
                 }
                 else

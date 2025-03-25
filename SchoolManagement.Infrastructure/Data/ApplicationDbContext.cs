@@ -20,6 +20,7 @@ namespace SchoolManagement.Infrastructure.Data
 
 
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
 
         public DbSet<DepartmetSubject> DepartmetSubjects { get; set; }
 
