@@ -24,5 +24,7 @@ namespace SchoolManagement.Service.Implementaions
         {
             return await _roleManager.RoleExistsAsync(roleName);
         }
+
+
     }
 }

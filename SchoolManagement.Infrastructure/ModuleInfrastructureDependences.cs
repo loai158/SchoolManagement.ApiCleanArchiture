@@ -14,6 +14,7 @@ namespace SchoolManagement.Infrastructure
             services.AddTransient<IDepartmentRepositry, DepartmentRepositry>();
             services.AddTransient<IInstructorRepositry, InstructorRepositry>();
             services.AddTransient<ISubjectRepositry, SubjectRepositry>();
+            services.AddTransient<IUserRefreshTokenRepositry, UserRefreshTokenRepositry>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient(typeof(IGenericRepositryAsync<>), typeof(GenericRepositryAsync<>));
             return services;
