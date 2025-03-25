@@ -42,5 +42,14 @@
             public const string SignIn = Perfix + "/SignIn";
 
         }
+
+        public static class Authorization
+        {
+            public const string Perfix = Rule + "Authorization";
+            public const string AddRole = Perfix + "/AddRole";
+
+        }
+
+
     }
 }

@@ -11,7 +11,13 @@ namespace SchoolManagement.Service
 
             services.AddTransient<IStudentServices, StudentServices>();
             services.AddTransient<IDepartmentServices, DepartmentServices>();
+
             services.AddTransient<IAuthenticationServices, AuthenticationServices>();
+
+            services.AddTransient<IAuthorizationServices, AuthorizationServices>();
+
+            services.AddTransient<IAuthenticationServices, AuthenticationServices>();
+
             return services;
         }
     }
