@@ -13,6 +13,12 @@ namespace SchoolManagement.Api.Controllers
             var response = await Mediator.Send(Command);
             return NewResult(response);
         }
+        [HttpPost(Router.Authentication.RefreshToken)]
+        public async Task<IActionResult> RefreshToken([FromForm] RefreshTokenCommand Command)
+        {
+            var response = await Mediator.Send(Command);
+            return NewResult(response);
+        }
 
     }
 }

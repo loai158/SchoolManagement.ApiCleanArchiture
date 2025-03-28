@@ -40,6 +40,7 @@
         {
             public const string Perfix = Rule + "Authentication";
             public const string SignIn = Perfix + "/SignIn";
+            public const string RefreshToken = Perfix + "/RefreshToken";
 
         }
 

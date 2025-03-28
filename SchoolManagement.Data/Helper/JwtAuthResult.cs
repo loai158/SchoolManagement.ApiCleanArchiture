@@ -1,4 +1,5 @@
-﻿namespace SchoolManagement.Data.Helper
+﻿
+namespace SchoolManagement.Data.Helper
 {
     public class JwtAuthResult
     {
@@ -12,5 +13,9 @@
         public string TokenString { get; set; }
         public DateTime? ExpiredAt { get; set; }
 
+        public static implicit operator RefreshToken(Task<JwtAuthResult> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
