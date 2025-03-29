@@ -47,6 +47,7 @@
         public static class Authorization
         {
             public const string Perfix = Rule + "Authorization";
+            public const string Claims = Perfix + "/Claims";
             public const string AddRole = Perfix + "/AddRole";
             public const string Edit = Perfix + "/Edit";
             public const string Delete = Perfix + "/{id}";
@@ -55,8 +56,7 @@
             public const string ManageUserRoles = Perfix + "/Manage-The-Roles/{userId}";
             public const string UpdateUserRoles = Perfix + "/Update-User-Roles";
             public const string ManageUserClaims = Perfix + "/Manage-User-Claims/{userId}";
+            public const string UpdateUserClaims = Claims + "/Update-User-Claims";
         }
-
-
     }
 }

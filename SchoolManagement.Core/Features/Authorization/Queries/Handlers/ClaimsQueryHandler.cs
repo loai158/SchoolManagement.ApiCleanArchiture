@@ -10,6 +10,7 @@ namespace SchoolManagement.Core.Features.Authorization.Queries.Handlers
 {
     public class ClaimsQueryHandler : ResponseHandler,
         IRequestHandler<MangeUserClaimsQuery, Response<ManageUserClaimsResponse>>
+
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
