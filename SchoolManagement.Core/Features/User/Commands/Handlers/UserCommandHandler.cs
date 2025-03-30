@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using SchoolManagement.Core.Basics;
 using SchoolManagement.Core.Features.User.Commands.Models;
 using SchoolManagement.Data.Entities.Identity;
+using SchoolManagement.Service.Abstacts;
 
 namespace SchoolManagement.Core.Features.User.Commands.Handlers
 {
@@ -13,12 +15,18 @@ namespace SchoolManagement.Core.Features.User.Commands.Handlers
         IRequestHandler<EditUserCommand, Response<string>>,
         IRequestHandler<ChangeUserPAsswordCommand, Response<string>>
     {
+        private readonly IEmailServices _emailServices;
+        private readonly IApplicationUserServices _applicationUserServices;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public UserCommandHandler(IMapper mapper, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public UserCommandHandler(IEmailServices emailServices, IApplicationUserServices applicationUserServices, IHttpContextAccessor httpContextAccessor, IMapper mapper, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
+            this._emailServices = emailServices;
+            this._applicationUserServices = applicationUserServices;
+            this._httpContextAccessor = httpContextAccessor;
             this._mapper = mapper;
             this._userManager = userManager;
             this._signInManager = signInManager;
@@ -27,28 +35,19 @@ namespace SchoolManagement.Core.Features.User.Commands.Handlers
         public async Task<Response<string>> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
             //check if already exist
-            var user = await _userManager.FindByEmailAsync(request.Email);
-            if (user == null)
+            var identityUser = _mapper.Map<ApplicationUser>(request);
+            //Create
+            var createResult = await _applicationUserServices.AddUserAsync(identityUser, request.Password);
+            switch (createResult)
             {
-                //map first
-                var registerUser = _mapper.Map<ApplicationUser>(request);
-                var result = await _userManager.CreateAsync(registerUser, request.Password);
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(registerUser, "Admin");
-                    return Created("User Rigistered Successfully");
-                }
-                else
-                {
-                    return BadRequest<string>("Faild to add new user");
-                }
-            }
-            else
-            {
-                return BadRequest<string>("Email Already Exist");
-            }
+                case "EmailIsExist": return BadRequest<string>("EmailIsExist");
+                case "UserNameIsExist": return BadRequest<string>("UserNameIsExist ");
+                case "ErrorInCreateUser": return BadRequest<string>("FaildToAddUser ");
+                case "Failed": return BadRequest<string>("TryToRegisterAgain");
+                case "Success": return Success<string>("");
+                default: return BadRequest<string>(createResult);
 
-
+            }
         }
 
         public async Task<Response<string>> Handle(EditUserCommand request, CancellationToken cancellationToken)

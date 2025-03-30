@@ -34,6 +34,8 @@ namespace SchoolManagement.Core.Features.Authentication.Commands.Handler
             else
             {
                 var signInResult = await _userManager.CheckPasswordAsync(user, request.Password);
+                if (!user.EmailConfirmed)
+                    BadRequest<JwtAuthResult>("Confirm Email is not");
                 if (!signInResult)
                 {
                     return BadRequest<JwtAuthResult>(" User Name Or PassWord Is Wrong");

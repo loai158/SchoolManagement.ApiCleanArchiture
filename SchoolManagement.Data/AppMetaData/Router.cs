@@ -43,6 +43,11 @@
             public const string RefreshToken = Perfix + "/RefreshToken";
 
         }
+        public static class EmailsRoute
+        {
+            public const string Perfix = Rule + "EmailsRoute";
+            public const string SendEmail = Perfix + "/SendEmail";
+        }
 
         public static class Authorization
         {

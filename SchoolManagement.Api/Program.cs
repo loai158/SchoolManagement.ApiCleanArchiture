@@ -92,13 +92,13 @@ namespace SchoolManagement.Api
             });
             //JWT
             var jwtSettings = new JwtSettings();
-            //   var emailSettings = new EmailSettings();
+            var emailSettings = new EmailSettings();
             // builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
             builder.Configuration.GetSection(nameof(jwtSettings)).Bind(jwtSettings);
-            //configuration.GetSection(nameof(emailSettings)).Bind(emailSettings);
+            builder.Configuration.GetSection(nameof(emailSettings)).Bind(emailSettings);
 
             builder.Services.AddSingleton(jwtSettings);
-            //services.AddSingleton(emailSettings);
+            builder.Services.AddSingleton(emailSettings);
             builder.Services.AddAuthentication(options =>
              {
                  options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

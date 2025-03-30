@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SchoolManagement.Data.Helper;
 using SchoolManagement.Infrastructure.Abstracts;
 using SchoolManagement.Infrastructure.InfrastructureBases;
 using SchoolManagement.Infrastructure.Repositries;
@@ -15,6 +16,7 @@ namespace SchoolManagement.Infrastructure
             services.AddTransient<IInstructorRepositry, InstructorRepositry>();
             services.AddTransient<ISubjectRepositry, SubjectRepositry>();
             services.AddTransient<IUserRefreshTokenRepositry, UserRefreshTokenRepositry>();
+            services.AddTransient<EmailSettings, EmailSettings>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient(typeof(IGenericRepositryAsync<>), typeof(GenericRepositryAsync<>));
             return services;
